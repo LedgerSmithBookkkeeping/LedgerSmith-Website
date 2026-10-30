@@ -67,6 +67,8 @@ p { margin: 0; }
 .skip-link:focus { left: 16px; top: 16px; background: var(--white); padding: 10px 16px; z-index: 100; border-radius: 8px; }
 
 /* ---------- Header ---------- */
+.holiday-banner { background: var(--ink); color: var(--gold-light); text-align: center; font-weight: 600; letter-spacing: 0.02em; padding: 10px 16px; }
+
 .site-header { background: var(--white); border-bottom: 1px solid var(--line); position: sticky; top: 0; z-index: 50; }
 .site-header .container { display: flex; align-items: center; justify-content: space-between; gap: 16px 28px; flex-wrap: wrap; padding-top: 16px; padding-bottom: 16px; }
 .logo img { height: 38px; width: auto; }
