@@ -71,22 +71,42 @@ p { margin: 0; }
 .site-header .container { display: flex; align-items: center; justify-content: space-between; gap: 12px 28px; flex-wrap: wrap; padding-top: 14px; padding-bottom: 14px; }
 .logo { display: block; flex-shrink: 0; }
 .logo img { display: block; height: 38px; width: auto; }
-/* Header logo is large enough for the small "BOOKKEEPING" line to stay legible */
-.site-header .logo img { height: 72px; transition: height .25s ease, opacity .25s ease; }
-/* Header logo is two stacked images: the full logo on top, and underneath it the same logo
-   without the BOOKKEEPING line. Fading the top one out leaves just the tagline disappearing. */
+/* ---------- Header logo ----------
+   The header logo is two stacked images: the full logo on top and, underneath it, the same
+   logo without the BOOKKEEPING line. On desktop, scrolling down shrinks the logo with a
+   transform anchored to its top-left corner (smooth, and the left edge never moves) while the
+   top image fades out, so only the BOOKKEEPING line disappears. */
 .site-header .logo { position: relative; }
 .site-header .logo .logo-full { position: relative; z-index: 1; }
 .site-header .logo .logo-compact { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
-.site-header .container { transition: padding .25s ease; }
-/* Once scrolled, shrink back to the compact size (desktop only; on phones the header isn't sticky) */
+
 @media (min-width: 641px) {
+  :root { --ease-header: cubic-bezier(.22, .61, .36, 1); --dur-header: .4s; }
+  /* Fixed rather than sticky, so the header shrinking never pushes the page content around.
+     header.js sets --header-h to the header's full height and the page is padded by that much. */
+  .site-header { position: fixed; left: 0; right: 0; }
+  body { padding-top: var(--header-h, 101px); }
+  html { scroll-padding-top: var(--header-h, 101px); }
+
+  .site-header .container { transition: padding var(--dur-header) var(--ease-header); }
+  .site-header .logo { height: 72px; transition: height var(--dur-header) var(--ease-header); }
+  .site-header .logo img {
+    height: 72px; width: auto; transform-origin: 0 0;
+    transition: transform var(--dur-header) var(--ease-header), opacity var(--dur-header) var(--ease-header);
+    will-change: transform;
+  }
+  .site-header .logo .logo-compact { width: auto; height: 72px; }
+
+  /* Scrolled: compact size (38px tall, the original logo size) */
   .site-header.is-scrolled .container { padding-top: 10px; padding-bottom: 10px; }
-  .site-header.is-scrolled .logo img { height: 38px; }
+  .site-header.is-scrolled .logo { height: 38px; }
+  .site-header.is-scrolled .logo img { transform: scale(0.5278); }
   .site-header.is-scrolled .logo .logo-full { opacity: 0; }
+
+  .site-header.no-anim, .site-header.no-anim * { transition: none !important; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .site-header .logo img, .site-header .container { transition: none; }
+  .site-header .logo, .site-header .logo img, .site-header .container { transition: none !important; }
 }
 .nav { display: flex; align-items: center; flex-wrap: wrap; gap: 6px 26px; font-weight: 600; font-size: 0.98rem; }
 .nav a { color: var(--ink); text-decoration: none; padding: 8px 0; }
