@@ -72,12 +72,18 @@ p { margin: 0; }
 .logo { display: block; flex-shrink: 0; }
 .logo img { display: block; height: 38px; width: auto; }
 /* Header logo is large enough for the small "BOOKKEEPING" line to stay legible */
-.site-header .logo img { height: 72px; transition: height .25s ease; }
+.site-header .logo img { height: 72px; transition: height .25s ease, opacity .25s ease; }
+/* Header logo is two stacked images: the full logo on top, and underneath it the same logo
+   without the BOOKKEEPING line. Fading the top one out leaves just the tagline disappearing. */
+.site-header .logo { position: relative; }
+.site-header .logo .logo-full { position: relative; z-index: 1; }
+.site-header .logo .logo-compact { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
 .site-header .container { transition: padding .25s ease; }
 /* Once scrolled, shrink back to the compact size (desktop only; on phones the header isn't sticky) */
 @media (min-width: 641px) {
   .site-header.is-scrolled .container { padding-top: 10px; padding-bottom: 10px; }
   .site-header.is-scrolled .logo img { height: 38px; }
+  .site-header.is-scrolled .logo .logo-full { opacity: 0; }
 }
 @media (prefers-reduced-motion: reduce) {
   .site-header .logo img, .site-header .container { transition: none; }
