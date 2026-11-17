@@ -29,10 +29,10 @@ Then add your domain in the project's **Settings → Domains**.
 
 ## Before going live
 
-1. **Connect the forms.** Create a free form at formspree.io and replace every
-   `https://formspree.io/f/YOUR_FORM_ID` (4 places: 2 in index.html, 1 in services.html,
-   1 in contact.html) with your form's endpoint. Submissions are emailed to you.
-   Until then, the forms show "This form isn't connected yet."
+1. **Forms — done.** All 4 forms (2 in index.html, 1 in services.html, 1 in contact.html)
+   post to the Formspree form "LedgerSmith website" (`https://formspree.io/f/xqpqqwqo`),
+   which emails submissions to hello@ledgersmithbookkeeping.com. Each submission includes
+   a hidden `form` field saying which page it came from.
 2. **Testimonials.** Replace the [bracketed] quotes on the home page with real client quotes
    (with their permission), or delete that section.
 3. **Phone number.** Replace `[Your phone number]` in contact.html.
