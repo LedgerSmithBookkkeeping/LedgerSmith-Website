@@ -68,8 +68,11 @@ p { margin: 0; }
 
 /* ---------- Header ---------- */
 .site-header { background: var(--white); border-bottom: 1px solid var(--line); position: sticky; top: 0; z-index: 50; }
-.site-header .container { display: flex; align-items: center; justify-content: space-between; gap: 16px 28px; flex-wrap: wrap; padding-top: 16px; padding-bottom: 16px; }
-.logo img { height: 38px; width: auto; }
+.site-header .container { display: flex; align-items: center; justify-content: space-between; gap: 12px 28px; flex-wrap: wrap; padding-top: 14px; padding-bottom: 14px; }
+.logo { display: block; flex-shrink: 0; }
+.logo img { display: block; height: 38px; width: auto; }
+/* Header logo is large enough for the small "BOOKKEEPING" line to stay legible */
+.site-header .logo img { height: 72px; }
 .nav { display: flex; align-items: center; flex-wrap: wrap; gap: 6px 26px; font-weight: 600; font-size: 0.98rem; }
 .nav a { color: var(--ink); text-decoration: none; padding: 8px 0; }
 .nav a:hover, .nav a[aria-current="page"] { color: var(--red); }
@@ -267,6 +270,8 @@ p { margin: 0; }
   .capture .btn { width: 100%; }
   .nav { gap: 4px 18px; font-size: 0.92rem; }
   .logo img { height: 32px; }
+  .site-header .logo img { height: auto; width: 100%; max-width: 400px; }
+  .site-header .logo { width: 100%; }
 }
 
 .form-status:empty { display: none; }
