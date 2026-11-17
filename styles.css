@@ -72,7 +72,16 @@ p { margin: 0; }
 .logo { display: block; flex-shrink: 0; }
 .logo img { display: block; height: 38px; width: auto; }
 /* Header logo is large enough for the small "BOOKKEEPING" line to stay legible */
-.site-header .logo img { height: 72px; }
+.site-header .logo img { height: 72px; transition: height .25s ease; }
+.site-header .container { transition: padding .25s ease; }
+/* Once scrolled, shrink back to the compact size (desktop only; on phones the header isn't sticky) */
+@media (min-width: 641px) {
+  .site-header.is-scrolled .container { padding-top: 10px; padding-bottom: 10px; }
+  .site-header.is-scrolled .logo img { height: 38px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .site-header .logo img, .site-header .container { transition: none; }
+}
 .nav { display: flex; align-items: center; flex-wrap: wrap; gap: 6px 26px; font-weight: 600; font-size: 0.98rem; }
 .nav a { color: var(--ink); text-decoration: none; padding: 8px 0; }
 .nav a:hover, .nav a[aria-current="page"] { color: var(--red); }
